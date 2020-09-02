@@ -2,9 +2,9 @@
   "name": "chattr-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f ./.env nodemon app.js",
+    "start": "env-cmd -f ./src/.env nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
