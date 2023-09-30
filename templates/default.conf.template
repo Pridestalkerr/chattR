@@ -1,0 +1,38 @@
+server {
+    listen   443 ssl;
+    server_name ${BACKEND_HOST};
+
+    ssl_certificate /etc/nginx/ssl/${BACKEND_HOST}/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/${BACKEND_HOST}/private.pem;
+
+    location / {
+        proxy_pass ${BACKEND_PROXY};
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+    }
+
+}
+
+server {
+    listen   443 ssl;
+    server_name ${FRONTEND_HOST};
+
+    ssl_certificate /etc/nginx/ssl/${FRONTEND_HOST}/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/${FRONTEND_HOST}/private.pem;
+
+    location / {
+        proxy_pass ${FRONTEND_PROXY};
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+    }
+
+}
+

@@ -1,0 +1,11 @@
+sudo docker attach b6c74d2cb51a
+
+sudo docker ps -a
+
+sudo docker-compose up
+
+sudo docker-compose build --no-cache backend frontend
+
+sudo docker rm -f $(docker ps -a -q)
+
+sudo mongod --auth --dbpath /var/lib/mongodb
